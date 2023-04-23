@@ -1,38 +1,41 @@
 #include "sort.h"
 
-
 /**
- * shell_sort - Sort an array of integers in ascending
- *              order using the shell sort algorithm.
- * @array: An array of integers.
- * @size: The size of the array.
- *
- * Description: Uses the Knuth interval sequence.
+*swap - the positions of two elements into an array
+*@array: array
+*@num1: array element
+*@num2: array element
+*/
+void swap(int *array, int num1, int num2)
+{
+
+	int tmp;
+
+	tmp = array[num1];
+	array[num1] = array[num2];
+	array[num2] = tmp;
+}
+/**
+ * shell_sort - function that sorts an array of integers in ascending
+ * order using the Shell sort algorithm, using the Knuth sequence
+ * @size: size of the array
+ * @array: the array to be sorted.
  */
 void shell_sort(int *array, size_t size)
 {
-	size_t gap, i, j;
-=======
-	unsigned int i = 0, j = 0, gap = 0;
-	int tmp = 0;
+	size_t gap = 1, i, index = 0;
 
 	if (array == NULL || size < 2)
 		return;
-
-	for (gap = 1; gap < (size / 3);)
-		gap = gap * 3 + 1;
-
-	for (; gap >= 1; gap /= 3)
+	while (gap < size / 3)
+		gap = 3 * gap + 1;
+	while (gap >= 1)
 	{
 		for (i = gap; i < size; i++)
-		{
-			j = i;
-			while (j >= gap && array[j - gap] > array[j])
-			{
-				swap_ints(array + j, array + (j - gap));
-				j -= gap;
-			}
-		}
+			for (index = i; index >= gap &&
+			 (array[index] < array[index - gap]); index -= gap)
+				swap(array, index, index - gap);
 		print_array(array, size);
+		gap /= 3;
 	}
 }
