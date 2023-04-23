@@ -7,66 +7,66 @@
  */
 void quick_sort(int *array, size_t size)
 {
-        if (array == NULL || size < 2)
-                return;
+	if (array == NULL || size < 2)
+		return;
 
-        quick_s(array, 0, size - 1, size);
+	quick_s(array, 0, size - 1, size);
 }
 
 /**
  * partition - partition
  * @array: array
+ * @lo: lower
+ * @hi: higher
  * @size: array's size
  * Return: i
- * quick_s - quick sort
- * @lower: lower
- * @higher:higher
  */
-int partition(int *array, int lower, int higher, size_t size)
+int partition(int *array, int lo, int hi, size_t size)
 {
-        int i = lower - 1, j = lower;
-        int axis = array[higher], tmp = 0;
+	int i = lo - 1, j = lo;
+	int pivot = array[hi], tmp = 0;
 
-        for (; j < higher; j++)
-        {
-                if (array[j] < axis)
-                {
-                        i++;
-                        if (array[i] != array[j])
-                        {
-                                tmp = array[i];
-                                array[i] = array[j];
-                                array[j] = tmp;
-                                print_array(array, size);
-                        }
-                }
-	    }
-        if (array[i + 1] != array[higher])
-        {
-                tmp = array[i + 1];
-                array[i + 1] = array[higher];
-                array[higher] = tmp;
-                print_array(array, size);
-        }
-        return (i + 1);
+	for (; j < hi; j++)
+	{
+		if (array[j] < pivot)
+		{
+			i++;
+			if (array[i] != array[j])
+			{
+				tmp = array[i];
+				array[i] = array[j];
+				array[j] = tmp;
+				print_array(array, size);
+			}
+		}
+	}
+	if (array[i + 1] != array[hi])
+	{
+		tmp = array[i + 1];
+		array[i + 1] = array[hi];
+		array[hi] = tmp;
+		print_array(array, size);
+	}
+	return (i + 1);
 }
+
 /**
  * quick_s - quick sort
  * @array: given array
- * @lower: lower
- * @higher:higher
+ * @lo: lower
+ * @hi:higher
  * @size: array's size
  * Return: void
  */
-
-void quick_s(int *array, int lower, int higher, size_t size)
+void quick_s(int *array, int lo, int hi, size_t size)
 {
-        int axis;
+	int pivot;
 
-        if (lower < higher)
-        {
-                axis = partition(array, lower, higher, size);
-                quick_s(array, lower, axis - 1, size);
-                quick_s(array, axis + 1, higher, size);
-        }
+	if (lo < hi)
+	{
+		pivot = partition(array, lo, hi, size);
+		quick_s(array, lo, pivot - 1, size);
+		quick_s(array, pivot + 1, hi, size);
+	}
 }
+
