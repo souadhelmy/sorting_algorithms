@@ -8,7 +8,7 @@
 void counting_sort(int *array, size_t size)
 {
 	unsigned int i = 1;
-	int *counter = NULL, k = 0, j = 0;
+	int *counter = NULL, k = 0, j = 0,tmp = 0 ;
 
 	if (array == NULL || size < 2)
 		return;
@@ -17,7 +17,7 @@ void counting_sort(int *array, size_t size)
 	for (; i < size; i++)
 	{
 		if (array[i] > k)
-		    k = array[i];
+		       k = array[i];
 	}
 
 	counter = malloc(sizeof(int) * (k + 1));
@@ -42,10 +42,11 @@ void counting_sort(int *array, size_t size)
 		
 		if (array[i] != array[j])
 		{
-			k = array[i];
+			tmp = array[i];
 			array[i] = array[j];
-			array[j] = k;
+			array[j] = tmp;
 		}
 	}
+	free(tmp);
 	free(counter);
 }
