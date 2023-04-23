@@ -49,7 +49,8 @@ int partition(int *array, int lower, int higher, size_t size)
                 print_array(array, size);
         }
         return (i + 1);
-}/**
+}
+/**
  * quick_s - quick sort
  * @array: given array
  * @lower: lower
