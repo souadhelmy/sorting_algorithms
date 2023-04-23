@@ -5,6 +5,7 @@
   *
   * @array: The array to be sorted.
   * @size: THe length of the aaray.
+  * Return:none
   */
 void bubble_sort(int *array, size_t size)
 {
