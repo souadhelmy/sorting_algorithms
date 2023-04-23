@@ -52,8 +52,8 @@ int partition(int *array, int lower, int higher, size_t size)
 }/**
  * quick_s - quick sort
  * @array: given array
- * @lo: lower
- * @hi:higher
+ * @lower: lower
+ * @higher:higher
  * @size: array's size
  * Return: void
  */
