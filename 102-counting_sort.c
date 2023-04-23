@@ -1,4 +1,6 @@
 #include "sort.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 /**
   * counting_sort - A function that sorts an array using counting algorithm.
@@ -32,7 +34,7 @@ void counting_sort(int *array, size_t size)
 	for (j = 0; j < k; j++)
 	{
 		counter[j + 1] += counter[j];
-		printf("%d,", counter[j]);
+		printf("%d, ", counter[j]);
 	}
 	counter[j + 1] += counter[j];
 	printf("%d\n", counter[j + 1]);
