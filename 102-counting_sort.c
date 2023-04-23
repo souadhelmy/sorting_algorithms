@@ -1,60 +1,50 @@
 #include "sort.h"
-#include <stdio.h>
-/**
- *_calloc - this is a calloc function
- *@num: number of elemets
- *@size: bit size of each element
- *Return: pointer to memory assignement
- */
-void *_calloc(unsigned int num, unsigned int size)
-{
-	unsigned int i = 0;
-	char *p;
 
-	if (num == 0 || size == 0)
-		return (NULL);
-	p = malloc(num * size);
-	if (p == NULL)
-		return (NULL);
-	for (i = 0; i < (num * size); i++)
-		p[i] = NULL;
-	return (p);
-}
 /**
- * counting_sort - sorts an array of integers in ascending order.
- * @array: array to sort
- * @size: array size
- */
+  * counting_sort - A function that sorts an array using counting algorithm.
+  * @array: The array to sort.
+  * @size: The length of the array.
+  * Return: Nothing.
+  */
 void counting_sort(int *array, size_t size)
 {
-	int index, maximun = 0, *counter = NULL, *tmp = NULL;
-	size_t i;
+	unsigned int i = 1;
+	int *counter = NULL, k = 0, j = 0;
 
 	if (array == NULL || size < 2)
 		return;
-	
-	for (i = 0; i < size; i++)
-		if (array[i] > maximun)
-			maximun = array[i];
-	counter = _calloc(maximun + 1, sizeof(int));
-	tmp = _calloc(size + 1, sizeof(int));
-	
-	for (i = 0; i < size; i++)
-		counter[array[i]]++;
-	
-	for (index = 1; index <= maximun; index++)
-		counter[index] += counter[index - 1];
-	print_array(counter, maximun + 1);
-	
-	for (i = 0; i < size; ++i)
+
+	k = array[0];
+	for (; i < size; i++)
 	{
-		tmp[counter[array[i]] - 1] = array[i];
-		counter[array[i]]--;
+		if (array[i] > k)
+			k = array[i];
 	}
 
-	for (i = 0; i < size; i++)
-		array[i] = tmp[i];
-	free(tmp);
-	free(counter);
+	counter = malloc(sizeof(int) * (k + 1));
+	if (counter == NULL)
+		return;
 
+	for (j = 0; j <= k; j++)
+		counter[j] = 0;
+	for (i = 0; i < size; i++)
+		counter[array[i]] += 1;
+	for (j = 0; j < k; j++)
+	{
+		counter[j + 1] += counter[j];
+		printf("%d, ", counter[j]);
+	}
+	counter[j + 1] += counter[j];
+	printf("%d\n", counter[j + 1]);
+	for (i = 0; i < size; i++)
+	{
+		j = counter[array[i]] - 1;
+		if (array[i] != array[j])
+		{
+			k = array[i];
+			array[i] = array[j];
+			array[j] = k;
+		}
+	}
+	free(counter);
 }
