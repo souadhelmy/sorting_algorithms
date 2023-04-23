@@ -24,26 +24,26 @@ void swap(int *array, ssize_t num1, ssize_t num2)
 int lomuto_partition(int *array, ssize_t first, ssize_t last, size_t size)
 {
 	int pivot = array[last];
-	ssize_t current = first, finder;
+	ssize_t above = first, finder;
 
 	for (finder = first; finder < last; finder++)
 	{
 		if (array[finder] < pivot)
 		{
-			if (array[current] != array[finder])
+			if (array[above] != array[finder])
 			{
-				swap(array, current, finder);
+				swap(array, above, finder);
 				print_array(array, size);
 			}
-			current++;
+			above++;
 		}
 	}
-	if (array[current] != array[last])
+	if (array[above] != array[last])
 	{
-		swap(array, current, last);
+		swap(array, above, last);
 		print_array(array, size);
 	}
-	return (current);
+	return (above);
 }
 /**
  *qs - qucksort algorithm implementation
