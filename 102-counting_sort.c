@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
 /**
   * counting_sort - A function that sorts an array using counting algorithm.
   * @array: The array to sort.
